@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import "./Style.css"
 import { useDispatch } from 'react-redux'
-import {addData} from "../Redux/Actions/allActions"
+import {addData, resetSearchMaterial,resetSoldSearch } from "../Redux/Actions/allActions"
 import { useHistory } from 'react-router'
 import cuid from 'cuid'
 const Home = () => {
@@ -11,7 +11,6 @@ const Home = () => {
         manufacturingDate:"",
         company:"",
         price:"",
-        sold:"false"
     })
     const history= useHistory()
     const dispatch = useDispatch()
@@ -27,7 +26,7 @@ const Home = () => {
             manufacturingDate:form.manufacturingDate,
             company:form.company,
             price:form.price,
-            sold:form.sold,
+            sold:"false",
             id:cuid()
         }))
         setForm({
@@ -41,21 +40,27 @@ const Home = () => {
     return (
         <div>
             <center>
-            <input type="button" value="Show" className="btn btn-primary m-3" onClick={()=> history.push("/show")}/>
+            <input type="button" value="Materials" className="btn btn-primary m-3" onClick={()=> {
+                dispatch(resetSearchMaterial())
+                history.push("/show")}}/>
+            <input type="button" value="Sold Material" className="btn btn-primary m-3" onClick={()=>{
+             dispatch(resetSoldSearch())
+             history.push("/showsold")}}/>
+            
                 <div className="form">
                 <h2>Add Material</h2>
                 <form  onSubmit={handleSubmit}>
                 <label >Material Type</label>
-                <input type="text" name="type" value={form.type} onChange={handleChange} /><br/><br/>
+                <input type="text" name="type" value={form.type} onChange={handleChange} required/><br/><br/>
                 <label>Unit</label>
-                <input type="number" name="unit" value={form.unit} onChange={handleChange} /><br/><br/>
+                <input type="number" name="unit" value={form.unit} onChange={handleChange} required/><br/><br/>
                 <label>Manufacturing Date</label>
-                <input type="date" name="manufacturingDate" value={form.manufacturingDate} onChange={handleChange} /><br/><br/>
+                <input type="date" name="manufacturingDate" value={form.manufacturingDate} onChange={handleChange} required/><br/><br/>
                 <label>Company</label>
-                <input type="text" name="company" value={form.company} onChange={handleChange} /><br/><br/>
+                <input type="text" name="company" value={form.company} onChange={handleChange} required/><br/><br/>
                 <label>Price</label>
-                <input type="number" name="price" value={form.price} onChange={handleChange} /><br/><br/>
-                <input type="submit" className="btn btn-primary" value="Submit" />
+                <input type="number" name="price" value={form.price} onChange={handleChange} required/><br/><br/>
+                <input type="submit" className="btn btn-primary m-3" value="Submit" />
                 </form>
                 </div>
             </center>

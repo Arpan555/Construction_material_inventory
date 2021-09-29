@@ -1,6 +1,12 @@
 .form{
-    width: 50%;
-    height: auto;
+    width: 30%;
+    text-align: center;
     background-color: antiquewhite;
     margin: 25px;
+}
+.related{
+    background-color:aquamarine;
+    width: 40%;
+    height: inherit;
+    
 }

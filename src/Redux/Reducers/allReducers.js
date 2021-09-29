@@ -1,8 +1,10 @@
-import { ADD_DATA, DELETE_DATA, EDIT_DATA, RESET_DATA, SET_DATA } from "../Actions"
+import { ADD_DATA, DELETE_DATA, EDIT_DATA, RESET_DATA, RESET_SEARCH_MATERIAL, RESET_SOLD_SEARCH, SEARCH_MATERIAL, SET_DATA, SOLD_SEARCH } from "../Actions"
 
 const initialState={
     data:[],
-    setData:{}
+    setData:{},
+    soldSearchDate:{},
+    searchMaterial:{}
 }
 export default function reducer(state=initialState,action){
     switch(action.type){
@@ -33,6 +35,26 @@ export default function reducer(state=initialState,action){
             return{
                 ...state,
                 setData:[]
+            }
+        case SOLD_SEARCH:
+            return{
+                ...state,
+                soldSearchDate:{...state.soldSearchDate,...action.payload}
+            }
+        case SEARCH_MATERIAL:
+            return{
+                ...state,
+                searchMaterial:{...state.searchMaterial,...action.payload}
+            }
+        case RESET_SEARCH_MATERIAL:
+            return{
+                ...state,
+                searchMaterial:{}
+            }
+        case RESET_SOLD_SEARCH:
+            return{
+                ...state,
+                soldSearchDate:{}
             }
         default:
             return state

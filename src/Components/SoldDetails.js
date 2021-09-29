@@ -1,18 +1,11 @@
-import React,{useState} from 'react'
-import { useHistory,useParams } from 'react-router-dom'
-import { useSelector,useDispatch } from 'react-redux'
-import {setData,deleteData} from "../Redux/Actions/allActions"
-import "./Style.css"
-const ShowDetails = () => {
+import React from 'react'
+import { useParams,useHistory } from 'react-router-dom'
+import { useDispatch,useSelector } from 'react-redux'
+const SoldDetails = () => {
     const {id}=useParams()
-    const dispatch = useDispatch()
     const history= useHistory()
     const allData = useSelector(state => state.reducer.data)
     const showData=allData.filter(da=> da.id === id)
-    
-    const handleDelete=(id)=>{
-        dispatch(deleteData(id))
-    }
     return (
         <div>
             <center>
@@ -26,15 +19,12 @@ const ShowDetails = () => {
                     <p>manufacturing Date:{d.manufacturingDate}</p>
                     <p>Sold:{d.sold}</p>
                     <p>ID:{d.id}</p>
-                    <input type="button" className="btn btn-warning m-3" value="Edit" onClick={()=>{
-                        history.push("/edit")
-                        dispatch(setData(d))
-                    } }/>
-                    <input type="button" className="btn btn-warning" value="Delete" onClick={()=>handleDelete(d.id)}/>
-                </div>)}
+                    <p>dateTime:{d.dateTime}</p>
+                    </div>)}
             </center>
         </div>
     )
 }
 
-export default ShowDetails
+
+export default SoldDetails

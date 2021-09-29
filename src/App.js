@@ -4,6 +4,8 @@ import Home from './Components/Home'
 import Show from "./Components/Show"
 import ShowDetails from './Components/ShowDetails'
 import Edit from "./Components/Edit"
+import SoldDetails from './Components/SoldDetails'
+import ShowSold from './Components/ShowSold'
 const App = () => {
     return (
         <div>
@@ -11,6 +13,8 @@ const App = () => {
                 <Switch>
                     <Route exact path="/" component={Home}/>
                     <Route exact path="/show" component={Show}/>
+                    <Route exact path="/showsold" component={ShowSold}/>
+                    <Route exact path="/solddetails/:id" component={SoldDetails}/>
                     <Route exact path="/show/:id" component={ShowDetails}/>
                     <Route exact path="/edit" component={Edit}/>
                 </Switch>
