@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom'
 import {soldSearch,resetSoldSearch} from "../Redux/Actions/allActions"
 let filteredData=[];
 let details=[];
+let data=[];
 const ShowSold = () => {
     const [search,setSearch]=useState({
         sdate:"",
@@ -11,7 +12,7 @@ const ShowSold = () => {
     })
     const dispatch = useDispatch()
     const history=useHistory()
-    const data=useSelector(state=>state.reducer.data)
+    data=JSON.parse(localStorage.getItem("data"))
     const searchDate=useSelector(state=>state.reducer.soldSearchDate)
     const soldData=data.filter(d=> d.sold === "true")
     if (searchDate !==[])

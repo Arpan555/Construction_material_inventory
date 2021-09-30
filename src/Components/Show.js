@@ -1,11 +1,11 @@
 import React,{useState} from 'react'
 import { useSelector,useDispatch} from 'react-redux'
 import { useHistory} from 'react-router-dom'
-import { editData,searchMaterial,resetSearchMaterial } from '../Redux/Actions/allActions'
+import { editData,searchMaterial,resetSearchMaterial,deleteData } from '../Redux/Actions/allActions'
 let filteredData=[];
 let details=[];
 let searchData=[];
-let data=[]
+let data=[];
 const Show = () => {
     const [filter,setFilter]=useState({
         type:"",
@@ -13,7 +13,7 @@ const Show = () => {
         edate:"",
         company:""
     })
-    data= useSelector(state=>state.reducer.data)
+    data= JSON.parse(localStorage.getItem("data"))
     const dispatch = useDispatch()
     const history=useHistory()
     const handleChange=(e)=>{
@@ -36,6 +36,7 @@ const Show = () => {
             company:""
         })
    }
+
     searchData=useSelector(state=>state.reducer.searchMaterial)
     if(searchData !== [])
     {   
@@ -71,35 +72,9 @@ const Show = () => {
                 filteredData=data.filter(d=> d.company === company )
             }
    }
-   if (filteredData.length>0)
-    {
-            details=filteredData.map(d=>
-                <div className="form" key={d.id}>
-                    <p>Company:{d.company}</p>
-                    <p>Type:{d.type}</p>
-                    <p>Manufacturing Date: {d.manufacturingDate}</p>
-                        {d.sold==="true" ? "" :
-                        <>
-                        <label>Sold: </label>
-                        <input type="checkbox" onChange={()=>
-                            dispatch(editData({
-                                type:d.type,
-                                unit:d.unit,
-                                manufacturingDate:d.manufacturingDate,
-                                company:d.company,
-                                price:d.price,
-                                sold:"true",
-                                soldDate: new Date().toISOString(),
-                                id:d.id
-                        }))
-                        } /><br/> </> }
-                    <input type="button" value="More" className="btn btn-success sm m-3" onClick={()=>
-                    history.push(`/show/${d.id}`) } />
-                </div>)
-    }
-    else
-    {
-            details=data.map( d=>
+   if (filteredData.length===0)
+   {
+                details=data.map( d=>
                 <div className="form" key={d.id}>
                     <p>Company:{d.company}</p>
                     <p>Type:{d.type}</p>
@@ -121,8 +96,39 @@ const Show = () => {
                         } /><br/> </> }
                     <input type="button" value="More" className="btn btn-success sm m-3" onClick={()=>
                     history.push(`/show/${d.id}`) } />
+                    <input type="button" className="btn btn-warning" value="Delete" onClick={()=>handleDelete(d.id)}/>
                 </div>)
-    } 
+   }
+   else
+   {
+        details=filteredData.map(d=>
+        <div className="form" key={d.id}>
+            <p>Company:{d.company}</p>
+            <p>Type:{d.type}</p>
+            <p>Manufacturing Date: {d.manufacturingDate}</p>
+                {d.sold==="true" ? "" :
+                <>
+                <label>Sold: </label>
+                <input type="checkbox" onChange={()=>
+                   { dispatch(editData({
+                        type:d.type,
+                        unit:d.unit,
+                        manufacturingDate:d.manufacturingDate,
+                        company:d.company,
+                        price:d.price,
+                        sold:"true",
+                        soldDate: new Date().toISOString(),
+                        id:d.id
+                    }))
+                } }/><br/> </> }
+            <input type="button" value="More" className="btn btn-success sm m-3" onClick={()=>
+            history.push(`/show/${d.id}`) } /> 
+        </div>)
+
+   }
+    const handleDelete=(id)=>{
+        dispatch(deleteData(id))
+    }
     let relatedData=filteredData.slice(0,3)
 return (
         <div>

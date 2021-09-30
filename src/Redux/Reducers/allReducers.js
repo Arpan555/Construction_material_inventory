@@ -1,4 +1,4 @@
-import { ADD_DATA, DELETE_DATA, EDIT_DATA, RESET_DATA, RESET_SEARCH_MATERIAL, RESET_SOLD_SEARCH, SEARCH_MATERIAL, SET_DATA, SOLD_SEARCH } from "../Actions"
+import { ADD_DATA, DELETE_DATA, EDIT_DATA, RESET_DATA, RESET_SEARCH_MATERIAL, RESET_SOLD_SEARCH, SEARCH_MATERIAL, SET_SINGLE_DATA, SOLD_SEARCH } from "../Actions"
 
 const initialState={
     data:[],
@@ -13,7 +13,7 @@ export default function reducer(state=initialState,action){
                 ...state,
                 data:[...state.data,action.payload]
             }
-        case SET_DATA:
+        case SET_SINGLE_DATA:
             return{
                 ...state,
                 setData:{...state.setData,...action.payload}

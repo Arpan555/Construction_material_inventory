@@ -1,10 +1,9 @@
 import React from 'react'
 import { useParams,useHistory } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 const SoldDetails = () => {
     const {id}=useParams()
     const history= useHistory()
-    const allData = useSelector(state => state.reducer.data)
+    const allData = JSON.parse(localStorage.getItem("data"))
     const showData=allData.filter(da=> da.id === id)
     return (
         <div>

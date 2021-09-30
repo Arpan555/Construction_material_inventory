@@ -29,6 +29,7 @@ const Home = () => {
             sold:"false",
             id:cuid()
         }))
+        
         setForm({
             type:"",
             unit:"",

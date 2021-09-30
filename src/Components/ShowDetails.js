@@ -1,17 +1,15 @@
 import React from 'react'
 import { useHistory,useParams } from 'react-router-dom'
-import { useSelector,useDispatch } from 'react-redux'
-import {setData,deleteData} from "../Redux/Actions/allActions"
+import { useDispatch } from 'react-redux'
+import {setSingleData} from "../Redux/Actions/allActions"
 import "./Style.css"
 const ShowDetails = () => {
     const {id}=useParams()
     const dispatch = useDispatch()
     const history= useHistory()
-    const allData = useSelector(state => state.reducer.data)
+    const allData = JSON.parse(localStorage.getItem("data"))
     const showData=allData.filter(da=> da.id === id)
-    const handleDelete=(id)=>{
-        dispatch(deleteData(id))
-    }
+    
     return (
         <div>
             <center>
@@ -27,9 +25,9 @@ const ShowDetails = () => {
                     <p>ID:{d.id}</p>
                     <input type="button" className="btn btn-warning m-3" value="Edit" onClick={()=>{
                         history.push("/edit")
-                        dispatch(setData(d))
+                        dispatch(setSingleData(d))
                     } }/>
-                    <input type="button" className="btn btn-warning" value="Delete" onClick={()=>handleDelete(d.id)}/>
+                    
                 </div>)}
             
             </center>
