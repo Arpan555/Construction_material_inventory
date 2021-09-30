@@ -28,12 +28,10 @@ const Edit = () => {
             unit:form.unit,
             manufacturingDate:form.manufacturingDate,
             company:form.company,
-            price:form.price,
-            soldDateTime:new Date().toISOString()
+            price:form.price
         }))
         dispatch(resetData())
         history.push('/show')
-
     }
     return (
         <div>
@@ -49,13 +47,10 @@ const Edit = () => {
                 <input type="text" name="company" defaultValue={oldData.company} onChange={handleChange} /><br/><br/>
                 <label>Price</label>
                 <input type="number" name="price" defaultValue={oldData.price} onChange={handleChange} /><br/><br/>
-                <label>Sold</label>
-                <input type="text" name="sold" defaultValue={oldData.sold} onChange={handleChange} /> <br/><br/>
                 <input type="submit" className="btn btn-primary" value="Submit" />
                 </form>
             </center>
         </div>
     )
 }
-
 export default Edit

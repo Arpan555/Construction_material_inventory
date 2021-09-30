@@ -1,5 +1,6 @@
 .form{
-    width: 30%;
+    width: 50%;
+    height: inherit;
     text-align: center;
     background-color: antiquewhite;
     margin: 25px;
@@ -8,5 +9,6 @@
     background-color:aquamarine;
     width: 40%;
     height: inherit;
-    
+
 }
+

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams,useHistory } from 'react-router-dom'
-import { useDispatch,useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 const SoldDetails = () => {
     const {id}=useParams()
     const history= useHistory()
@@ -19,12 +19,10 @@ const SoldDetails = () => {
                     <p>manufacturing Date:{d.manufacturingDate}</p>
                     <p>Sold:{d.sold}</p>
                     <p>ID:{d.id}</p>
-                    <p>dateTime:{d.dateTime}</p>
+                    <p>dateTime:{d.soldDate}</p>
                     </div>)}
             </center>
         </div>
     )
 }
-
-
 export default SoldDetails

@@ -17,12 +17,12 @@ const ShowSold = () => {
     if (searchDate !==[])
     {
         const {sdate,edate}=searchDate
-        filteredData=soldData.filter(p=> Date.parse(p.dateTime) >= Date.parse(sdate) 
-        && Date.parse(p.dateTime)<= Date.parse(edate)  )   
+        filteredData=soldData.filter(p=> Date.parse(p.soldDate) >= Date.parse(sdate) 
+        && Date.parse(p.soldDate) <= Date.parse(edate)  )   
     }
-    if (filteredData.length === 0)
+    if (filteredData.length>0)
     {   
-        details=soldData.map(d=>
+        details=filteredData.map(d=>
             <div className="form" key={d.id}>
                 <p>Company:{d.company}</p>
                 <p>Type:{d.type}</p>
@@ -31,7 +31,7 @@ const ShowSold = () => {
             </div>)
     }
     else{
-        details=filteredData.map(d=>
+        details=soldData.map(d=>
             <div className="form" key={d.id}>
                 <p>Company:{d.company}</p>
                 <p>Type:{d.type}</p>
@@ -55,10 +55,11 @@ const ShowSold = () => {
             edate:""
         })
     }
+    const relatedData=filteredData.slice(0,3)
     return (
         <div>
             <center>
-                <input type="button" className="btn btn-dark m-3" value="Back To Home" onClick={()=>history.push("/")} />
+                <input type="button" className="btn btn-dark m-3" value="Back To Home" onClick={()=>  history.push("/")}/>
                 <br/><br/>
                 {soldData.length>0 ? 
                 <>
@@ -71,8 +72,16 @@ const ShowSold = () => {
                 </form>
                 </>:"No Record Found" } <br/>
                 <hr/>
-                {details}
-          
+                <p>{details}</p>
+                {relatedData.length>0 ?
+                <><hr/>
+                <h2>Related Data</h2>
+                {relatedData.map(d=>
+                    <div className="related">
+                        <p>Company:{d.company}</p>
+                        <p>Type:{d.type}</p>
+                    </div>)}
+                    </>:""}
             </center>
         </div>
     )

@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React from 'react'
 import { useHistory,useParams } from 'react-router-dom'
 import { useSelector,useDispatch } from 'react-redux'
 import {setData,deleteData} from "../Redux/Actions/allActions"
@@ -9,7 +9,6 @@ const ShowDetails = () => {
     const history= useHistory()
     const allData = useSelector(state => state.reducer.data)
     const showData=allData.filter(da=> da.id === id)
-    
     const handleDelete=(id)=>{
         dispatch(deleteData(id))
     }
@@ -32,6 +31,7 @@ const ShowDetails = () => {
                     } }/>
                     <input type="button" className="btn btn-warning" value="Delete" onClick={()=>handleDelete(d.id)}/>
                 </div>)}
+            
             </center>
         </div>
     )

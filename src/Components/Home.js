@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import "./Style.css"
 import { useDispatch } from 'react-redux'
-import {addData, resetSearchMaterial,resetSoldSearch } from "../Redux/Actions/allActions"
+import {addData} from "../Redux/Actions/allActions"
 import { useHistory } from 'react-router'
 import cuid from 'cuid'
 const Home = () => {
@@ -40,13 +40,10 @@ const Home = () => {
     return (
         <div>
             <center>
-            <input type="button" value="Materials" className="btn btn-primary m-3" onClick={()=> {
-                dispatch(resetSearchMaterial())
-                history.push("/show")}}/>
-            <input type="button" value="Sold Material" className="btn btn-primary m-3" onClick={()=>{
-             dispatch(resetSoldSearch())
-             history.push("/showsold")}}/>
-            
+            <input type="button" value="Materials" className="btn btn-primary m-3" onClick={()=>
+                history.push("/show")}/>
+            <input type="button" value="Sold Material" className="btn btn-primary m-3" onClick={()=>
+             history.push("/showsold")}/>
                 <div className="form">
                 <h2>Add Material</h2>
                 <form  onSubmit={handleSubmit}>
