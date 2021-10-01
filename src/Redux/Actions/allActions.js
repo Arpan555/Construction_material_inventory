@@ -17,7 +17,6 @@ export const setSingleData=(data)=>{
 }
 export const deleteData=(id)=>{    
     locData=JSON.parse(localStorage.getItem("data"))
-    console.log(locData)
     allData= locData.filter(d=> d.id !== id)
     localStorage.setItem("data",JSON.stringify(allData))
     return{
